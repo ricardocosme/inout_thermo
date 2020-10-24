@@ -1,4 +1,4 @@
-** Inside&Outside themometer
+** Inside&Outside thermometer
 This is an ATtiny85 project to measure the ambient temperature of my office and the outside temperature. The temperatures are measured with two DS18B20 sensor and the values are shown on a SSD1306 0.96" OLED display. The code is written in C++20 with two goals in mind: [[#code-size][small code size]] and [[#power-consumption][low power consumption]].
 
 [[file:in_action_640px.png]]
@@ -16,7 +16,7 @@ This project uses *1996bytes* (~text=1980;data=12;bss=1~) if compiled with ~avr-
 :PROPERTIES:
 :CUSTOM_ID: power-consumption
 :END:
-The watchdog timer is used to save power when the device is not reading a temperature. The temperatures are taken every 10 minutes and the MCU is put in sleep mode(Power-down mode) after the measurements. Another important point is that the constrast of the display is defined to be the lowest possible. If the system is powered by a 5V battery, it  consumes *~1.92mA* when sleeping and it reaches a peak of *~3.87mA* when it wake up to take the temperature. The process of taking one temperature value lasts *~100ms*. The MCU is running under 1Mhz clock.
+The watchdog timer is used to save power when the device is not reading a temperature. The temperatures are taken every 10 minutes and the MCU is put in sleep mode(Power-down mode) after the measurements. Another important point is that the contrast of the display is defined to be the lowest possible. If the system is powered by a 5V battery, it  consumes *~1.92mA* when sleeping and it reaches a peak of *~3.87mA* when it wake up to take the temperature. The process of taking one temperature value lasts *~100ms*. The MCU is running under 1Mhz clock.
 
 ** Dependencies
 1. [[https://github.com/ricardocosme/att85][ssd1306]]
