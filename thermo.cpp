@@ -1,29 +1,13 @@
 #include <att85/ssd1306/display.hpp>
 #include <att85/ssd1306/font/16x32/chars.hpp>
 #include <att85/ssd1306/font/8x8/chars.hpp>
-#include <avr/interrupt.h>
-#include <avr/sleep.h>
-#include <avr/wdt.h>
+#include <avrcxx/sleep/power_down.hpp>
 #include <ds18b20.hpp>
 
 using namespace att85::ssd1306;
 using namespace att85::ssd1306::commands;
 using namespace ds18b20;
-
-uint8_t cnt;
-
-inline bool less_than_10min()
-{ return cnt < ( (10 * 60) / 8 ); }
-
-inline void sleep() {
-    while(less_than_10min()) {
-        sleep_enable();
-        sleep_cpu();
-    }
-    cnt = 0;
-}
-
-ISR(WDT_vect) { ++cnt; }
+using namespace avrcxx;
 
 inline void disable_unused_pins()
 { PORTB = PORTB | (1 << PB1) | (1 << PB4) | (1 << PB5); }
@@ -49,12 +33,6 @@ int main() {
 
     disable_unused_pins();
 
-    set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-
-    //Wathdog timeout interrupt at each 8s 
-    WDTCR = (1 << WDIE) | (1 << WDP3) | (1 << WDP0);
-    sei();
-    
     temperature in_temp;
     temperature out_temp;
     while(true) {
@@ -64,6 +42,7 @@ int main() {
         if(out_temp = outside.read(), out_temp)
             if(out_temp.has_value())
                 disp.out<font::_16x32>(3, 74, out_temp.value());
-        if(in_temp && out_temp) sleep();
+        if(in_temp && out_temp)
+            sleep::power_down::sleep<10min>();
     }
 }

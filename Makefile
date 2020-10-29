@@ -6,7 +6,7 @@ CXX=avr-g++
 CC=avr-gcc
 OBJCOPY=avr-objcopy
 OBJDUMP=avr-objdump
-INCLUDE=-I../att85/include -I../ds18b20/include
+INCLUDE=-I../att85/include -I../ds18b20/include -I../avrcxx/include
 CXXFLAGS=-std=$(STD_CXX) -g -mmcu=$(MCU_TARGET) -Wall $(OPTIMIZE) -DF_CPU=1000000 $(INCLUDE)
 
 demos = thermo
@@ -25,7 +25,7 @@ include $(demos:%=%.d)
 	$(CXX) $(CXXFLAGS) -S $^
 
 %.elf: %.o
-	$(CXX) $(CXXFLAGS) -o $@ $^ 
+	$(CXX) $(CXXFLAGS) -o $@ $^ ../avrcxx/src/avrcxx/watchdog/counter.cpp
 
 %.lst: %.elf
 	$(OBJDUMP) -h -S $< > $@
