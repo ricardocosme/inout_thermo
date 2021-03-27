@@ -10,7 +10,7 @@ This is an ATtiny85 project to measure the ambient temperature of my office and 
 :PROPERTIES:
 :CUSTOM_ID: code-size
 :END:
-This project uses *1978bytes* if compiled with ~avr-gcc 10.2.0~ and ~-Os~. 
+This project uses *1780bytes* if compiled with ~avr-gcc 10.2~ and ~-Os~. 
 
 ** Power consumption
 :PROPERTIES:
@@ -26,3 +26,8 @@ The watchdog timer is used to save power when the device is not reading a temper
 ** Software requirements
 1. ~avr-gcc 10.2~ with ~-std=c++20~
 2. ~avr-libc 2.0~
+
+43ATtiny25/45/85 [DATASHEET]2586Q–AVR–08/2013
+
+
+In this mode, the Watchdog Timer is initially disabled, but can be enabled by writing the WDE bit to one without anyrestriction. A timed sequence is needed when disabling an enabled Watchdog Timer
