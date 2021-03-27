@@ -22,6 +22,8 @@ The watchdog timer is used to save power when the device is not reading a temper
 1. [[https://github.com/ricardocosme/att85][ssd1306]]
 2. [[https://github.com/ricardocosme/ds18b20][ds18b20]]
 3. [[https://github.com/ricardocosme/avrcxx][avrcxx]]
+4. [[https://github.com/ricardocosme/avrIO][avrIO]]
+5. [[https://github.com/ricardocosme/avrINT][avrINT]]
 
 ** Software requirements
 1. ~avr-gcc 10.2~ with ~-std=c++20~
