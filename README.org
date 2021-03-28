@@ -1,10 +1,10 @@
 ** Inside&Outside thermometer
 This is an ATtiny85 project to measure the ambient temperature of my office and the outside temperature. The temperatures are measured with two DS18B20 sensor and the values are shown on a SSD1306 0.96" OLED display. The code is written in C++17/20 with two goals in mind: [[#code-size][small code size]] and [[#power-consumption][low power consumption]].
 
-[[file:in_action_640px.png]]
+[[file:images/in_action_640px.png]]
 
 ** Circuit
-[[file:circuit.png]]
+[[file:images/circuit.png]]
 
 ** Code size
 :PROPERTIES:
@@ -26,5 +26,5 @@ The watchdog timer is used to save power when the device is not reading a temper
 5. [[https://github.com/ricardocosme/avrINT][avrINT]]
 
 ** Software requirements
-1. ~avr-gcc 10.2~ with ~-std=c++20~
+1. ~avr-gcc 10.2~ with ~-std=c++20~ and ~-Os~
 2. ~avr-libc 2.0~
