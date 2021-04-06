@@ -1,14 +1,16 @@
 #include <att85/ssd1306/display.hpp>
 #include <att85/ssd1306/font/16x32/chars.hpp>
 #include <att85/ssd1306/font/8x8/chars.hpp>
-#include <avr/sleep/power_down.hpp>
+#include <avr/sleep.hpp>
 #include <ds18b20.hpp>
 
 using namespace att85::ssd1306;
 using namespace att85::ssd1306::commands;
 using namespace ds18b20;
-using namespace avr;
 using namespace avr::io;
+using namespace avr::sleep;
+
+AVRINT_WDT(){ inc_wdt_cnt(); }
 
 inline auto thermo(auto rom)
 { return sensor{pb3, rom, internal_pullup, resolution::_9bits}; }
@@ -37,6 +39,6 @@ int main() {
         if(auto out_temp = outside.read())
             if(out_temp.has_value())
                 disp.out<font::_16x32>(3, 74, out_temp.value());
-        sleep::power_down::sleep<10min>();
+        power_down::sleep_for<10_min>();
     }
 }

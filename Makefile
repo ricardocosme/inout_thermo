@@ -2,10 +2,9 @@ all: thermo.elf
 
 %.elf: %.cpp
 	avr-g++ -std=c++20 -Os -mmcu=attiny85 -DF_CPU=1000000 -Wall -o $@ $< \
-	../avrcxx/src/avr/watchdog/isr.cpp \
 	-I../att85/include \
 	-I../ds18b20/include \
-	-I../avrcxx/include \
+	-I../avrSLEEP/include \
 	-I../avrIO/include \
 	-I../avrWDT/include \
 	-I../avrINT/include
