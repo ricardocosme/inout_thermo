@@ -3,25 +3,30 @@ This is an ATtiny85 project to measure the ambient temperature of my office and 
 
 [[file:images/in_action_640px.png]]
 
+/Note: The photo above is outdated because now there is a push button to turn on the device./
+
 ** Circuit
 [[file:images/circuit.png]]
+
+/Note: The image is outdated because now there is a push button to turn on the device./
 
 ** Code size
 :PROPERTIES:
 :CUSTOM_ID: code-size
 :END:
-This project uses *1389bytes* if compiled with ~avr-gcc 10.2~ and ~-Os~. 
+This project uses *1794bytes* if compiled with ~avr-gcc 10.2~ and ~-Os~. 
 
 ** Power consumption
 :PROPERTIES:
 :CUSTOM_ID: power-consumption
 :END:
-The watchdog timer is used to save power when the device is not reading a temperature. The temperatures are taken every 10 minutes and the MCU is put in sleep mode(Power-down mode) after the measurements. Another important point is that the contrast of the display is defined to be the lowest possible. If the system is powered by a 5V battery, it  consumes *~1.82mA* when sleeping and it reaches a peak of *~3.87mA* when it wake up to take the temperature. The process of taking one temperature value lasts *~100ms*. The MCU is running under 1Mhz clock.
+The system stays at power down mode sleep consuming *0.5uA @ 5V* and it wakes up when the power switch is pressed. The process of taking one temperature value lasts *~100ms* and the pair of temperatures are displayed by 8 seconds, after that the system goes to sleep again. Another important point is that the contrast of the display is defined to be the lowest possible. The system reaches a peak of *~3.87mA* when it wakes up to take the temperatures. The MCU is running under 1Mhz clock.
 
 ** Dependencies
 1. [[https://github.com/ricardocosme/ssd1306][ssd1306]]
 2. [[https://github.com/ricardocosme/ds18b20][ds18b20]]
 3. [[https://github.com/ricardocosme/avrcxx][avrcxx]]
+4. [[https://github.com/ricardocosme/power_switch][power_switch]]
 
 ** Requirements
 1. ~avr-gcc 10.2~ with ~-std=c++20 -Os~
