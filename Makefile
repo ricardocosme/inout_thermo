@@ -10,7 +10,8 @@ all: thermo.elf
 	-I../avrSLEEP/include \
 	-I../avrIO/include \
 	-I../avrWDT/include \
-	-I../avrINT/include
+	-I../avrINT/include \
+	-I../power_switch/include
 	avr-size $@
 
 %.s: %.elf
